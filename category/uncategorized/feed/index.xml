@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>未分类 归档 &#187; 終ノ空</title>
+	<atom:link href="/category/uncategorized/feed/" rel="self" type="application/rss+xml" />
+	<link>/category/uncategorized/</link>
+	<description>坚定步伐。</description>
+	<lastBuildDate>Mon, 17 Jan 2022 19:30:14 +0000</lastBuildDate>
+	<language>zh-Hans</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.8.1</generator>
+
+<image>
+	<url>/wp-content/uploads/2018/01/cropped-cropped-2015-12-28-171854-1-32x32.jpg</url>
+	<title>未分类 归档 &#187; 終ノ空</title>
+	<link>/category/uncategorized/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>加入Disqus社区 分享一下集成方法</title>
+		<link>/2016/01/14/integrate-disqus/</link>
+		
+		<dc:creator><![CDATA[岡崎鏡]]></dc:creator>
+		<pubDate>Thu, 14 Jan 2016 14:30:56 +0000</pubDate>
+				<category><![CDATA[未分类]]></category>
+		<category><![CDATA[css]]></category>
+		<category><![CDATA[JavaScript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[wordpress]]></category>
+		<category><![CDATA[编程]]></category>
+		<guid isPermaLink="false">/?p=740</guid>
+
+					<description><![CDATA[<p>Disqus的跨站点交流功能非常吸引我，于是花了点时间给自己的博客装上。过程实际上只有几步，关键是在于如何确定margin的大小，以此调节Disqus模块位置，使其与现用的主题（官方默认的Twenty Fifteen）融合。安装完Disqus插件并且导入原有的评论，看上去是这样的： 比较难看 ，要是不能调我宁愿不装了。看了下官方的说明，似乎需要自己动手调整CSS，Disqus的div id为&#8...</p>
+<p><a href="/2016/01/14/integrate-disqus/">加入Disqus社区 分享一下集成方法</a>最先出现在<a href="/">終ノ空</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<div class="wp-block-image"><figure class="aligncenter"><a href="http://www.kagami.biz/wp-content/uploads/2016/01/qqe688aae59bbe20160114222144.jpg" rel="attachment wp-att-743"><img fetchpriority="high" decoding="async" width="990" height="933" src="http://www.kagami.biz/wp-content/uploads/2016/01/qqe688aae59bbe20160114222144.jpg" alt="QQ截图20160114222144" class="wp-image-743" srcset="/wp-content/uploads/2016/01/qqe688aae59bbe20160114222144.jpg 990w, /wp-content/uploads/2016/01/qqe688aae59bbe20160114222144-300x283.jpg 300w, /wp-content/uploads/2016/01/qqe688aae59bbe20160114222144-768x724.jpg 768w" sizes="(max-width: 990px) 100vw, 990px" /></a></figure></div>
+
+
+
+<p>Disqus的跨站点交流功能非常吸引我，于是花了点时间给自己的博客装上。<br>过程实际上只有几步，关键是在于如何确定margin的大小，以此调节Disqus模块位置，使其与现用的主题（官方默认的Twenty Fifteen）融合。<br>安装完Disqus插件并且导入原有的评论，看上去是这样的：<br><br>比较难看 ，要是不能调我宁愿不装了。<br>看了下官方的说明，似乎需要自己动手调整CSS，Disqus的div id为&#8217;disqus_thread&#8217;。<br>我也尝试过用Wordpress自带的CSS编辑功能，但不太熟悉CSS，没有找到对应主题样式调节margin, padding的方法，将主题样式表中的media部分照搬过来似乎不管用。于是转投JavaScript，安装插件<a href="https://wordpress.org/plugins/custom-css-and-javascript/" target="_blank" rel="noopener noreferrer">Custom CSS and Javascript</a>。<br>简单地分析后发现，只需要获取&lt;article&gt;的两边margin并为Disqus的div赋上并调节背景色即可，通过以下代码完成。</p>
+
+
+
+<span id="more-740"></span>
+
+
+
+<pre class="wp-block-code EnlighterJSRAW"><code>jQuery(document).ready(function () {
+  var $article = jQuery('article').first();
+  var $disqus = jQuery('#disqus_thread');
+  $disqus.css('margin-left', $inner.css('margin-left')).css('margin-right', $inner.css('margin-right')).css('background-color', 'white').css('padding', '30px');
+})</code></pre>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter"><a href="http://www.kagami.biz/wp-content/uploads/2016/01/qqe688aae59bbe20160114223026.jpg" rel="attachment wp-att-745"><img decoding="async" width="966" height="820" src="http://www.kagami.biz/wp-content/uploads/2016/01/qqe688aae59bbe20160114223026.jpg" alt="QQ截图20160114223026" class="wp-image-745" srcset="/wp-content/uploads/2016/01/qqe688aae59bbe20160114223026.jpg 966w, /wp-content/uploads/2016/01/qqe688aae59bbe20160114223026-300x255.jpg 300w, /wp-content/uploads/2016/01/qqe688aae59bbe20160114223026-768x652.jpg 768w" sizes="(max-width: 966px) 100vw, 966px" /></a></figure></div>
+
+
+
+<p>完成后的模样：<br><br>只是非常简单的一个小修改，希望能给不知如何整合Disqus的朋友一点思路。</p>
+<p><a href="/2016/01/14/integrate-disqus/">加入Disqus社区 分享一下集成方法</a>最先出现在<a href="/">終ノ空</a>。</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>关于生成质数 (Prime Number) 的思路</title>
+		<link>/2015/08/10/how-to-generate-prime-number/</link>
+					<comments>/2015/08/10/how-to-generate-prime-number/#comments</comments>
+		
+		<dc:creator><![CDATA[岡崎鏡]]></dc:creator>
+		<pubDate>Sun, 09 Aug 2015 23:19:25 +0000</pubDate>
+				<category><![CDATA[未分类]]></category>
+		<category><![CDATA[算法]]></category>
+		<category><![CDATA[质数]]></category>
+		<guid isPermaLink="false">http://716.6fd.myftpupload.com/?p=589</guid>
+
+					<description><![CDATA[<p>最近在学习MIT的在线计算机科学入门课程，碰到了生成质数的问题。所谓的质数，就是在大于1的正整数中，因数只有1和其本身的整数。比如2，3，5……。第一反应之下，我只想到最笨的办法： def genPrimesDirectly(): '''Generate Prime Numbers using Python generator. It is the worst economic method I ...</p>
+<p><a href="/2015/08/10/how-to-generate-prime-number/">关于生成质数 (Prime Number) 的思路</a>最先出现在<a href="/">終ノ空</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>最近在学习MIT的在线计算机科学入门课程，碰到了生成质数的问题。<br>所谓的质数，就是在大于1的正整数中，因数只有1和其本身的整数。比如2，3，5……。<br>第一反应之下，我只想到最笨的办法：</p>
+
+
+
+<pre class="wp-block-preformatted EnlighterJSRAW">def genPrimesDirectly():
+  '''Generate Prime Numbers using Python generator.
+    It is the worst economic method I can think of. The complexity should be O(nlog(n))
+    Written by aresowj on 08/09/2015'''
+  n = 2		#First number
+  yield n
+  while True:
+    n += 1						#Start from 3
+    for i in range(2, n):		#Calculates every number from 2 to n-1 to confirm if any factor of n
+      if n % i == 0:
+        break
+      elif i == n - 1:		#If i is the last number in the sequence and i is not a factor of n, n is a prime number. Then yield it.
+        yield n</pre>
+
+
+
+<p>能够改进的地方还是有的，那就是缩小在判断每一个数字时用来求余的范围。在笨办法里，程序将用 [2, n-1] 这个区间里的每个数对n求余，如果发现n能够被区间内的某个数除尽，则判断n不是质数，从而跳到下一个n的判断中。<br>然而，实际上我们只需要在[2, sqrt(n)]这个范围内进行判断就好了。其原因在于，因数都是成对出现的，比如100的因数有1和100，2和50，4和25……10和10。可以看出，成对的因数会逐渐地互相“靠近”，并且总有一个因数小于等于该数的平方根，另一个因数大于等于该数的平方根。</p>
+
+
+
+<span id="more-589"></span>
+
+
+
+<pre class="wp-block-preformatted EnlighterJSRAW">import math
+def genPrimesModified():
+  '''Generate Prime Numbers using Python generator.
+    Instead of looping from 2 to n, the better way is to set the end point at sqrt(n). The complexity should be O(n(log(logn)))
+    Written by aresowj on 08/09/2015'''
+  n = 2		#First number
+  yield n
+  n = 3		#Second number
+  yield n
+  while True:
+    n += 1				#We would like to start from number 4 because number 3 will not trigger the for loop and will be ingnored.
+    for i in range(2, int(math.sqrt(n))+1):
+      if n % i == 0:
+        break		#Stop this for loop and turn back to the outer while loop when a number was found to be a factor of n.
+      elif i == int(math.sqrt(n)):
+        yield n		#If i is the last number in the sequence and i is not a factor of n, n is a prime number. Then yield it.</pre>
+
+
+
+<p>如果要再进一步优化，就将用于判断的数限定在已经求出的质数里，结束点同样是sqrt(n)。下列代码引用自MIT的在线慕课MITx: 6.00.1x Introduction to Computer Science and Programming Using Python。</p>
+
+
+
+<pre class="wp-block-preformatted EnlighterJSRAW">'''
+Referred from MITx: 6.00.1x Introduction to Computer Science and Programming Using Python, Lecture 12
+URL: https://courses.edx.org/courses/course-v1:MITx+6.00.1x_6+2T2015/courseware/Week_6/videosequence:Lecture_11/
+'''
+# Note that our solution makes use of the for/else clause, which
+# you can read more about here:
+# http://docs.python.org/release/1.5/tut/node23.html
+def genPrimes():
+    primes = []   # primes generated so far
+    last = 1      # last number tried
+    while True:
+        last += 1
+        for p in primes:
+            if last % p == 0:
+                break
+        else:
+            primes.append(last)
+            yield last</pre>
+
+
+
+<p>我又想起来，之前好像在哪看过一个“筛选法”，是用排除的办法来选出质数。思路如下：</p>
+
+
+
+<ol class="wp-block-list"><li>确定要求质数的范围，比如[2, 100]；</li><li>从最小的质数2开始，将范围中2的倍数全部剔除，然后将下一个整数的倍数也都剔除；</li><li>如此循环下去，剩下的就全是质数了。</li></ol>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter"><a href="/how-to-generate-prime-number/oqaaamq7u67pv8k_vp7upvjxendnj_h7kdt6bkzfbh75euvikjjoevybbesq4kr72tv2m1h3x9ktmzhslqyi-xbpxc8a15jojl4byetggk6hvvmcrhy5d6r0ydsl/"><img decoding="async" width="445" height="369" src="http://www.kagami.biz/wp-content/uploads/2015/08/oqaaamq7u67pv8k_vp7upvjxendnj_h7kdt6bkzfbh75euvikjjoevybbesq4kr72tv2m1h3x9ktmzhslqyi-xbpxc8a15jojl4byetggk6hvvmcrhy5d6r0ydsl-1.gif" alt="Find prime numbers" class="wp-image-591"/></a></figure></div>
+
+
+
+<p>可以用一张动画来形象地表示这个过程：<br><br>&nbsp;<br>然而，这个办法主要针对于已经确定了求值范围的情况。如果要写出一个更有效的可以不断生成新质数的函数，就应该在上述代码的基础上改进一下。各位可以参考一下廖雪峰老师在其Python 3教程使用filter函数实现的办法：<a href="http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431821084171d2e0f22e7cc24305ae03aa0214d0ef29000" target="_blank" rel="noopener noreferrer">filter &#8211; 廖雪峰的官方网站</a><br>&nbsp;<br>&nbsp;</p>
+<p><a href="/2015/08/10/how-to-generate-prime-number/">关于生成质数 (Prime Number) 的思路</a>最先出现在<a href="/">終ノ空</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/2015/08/10/how-to-generate-prime-number/feed/</wfw:commentRss>
+			<slash:comments>1</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>为一位友人默哀</title>
+		<link>/2014/12/04/a-sad-memo-for-a-friend/</link>
+		
+		<dc:creator><![CDATA[岡崎鏡]]></dc:creator>
+		<pubDate>Thu, 04 Dec 2014 08:02:09 +0000</pubDate>
+				<category><![CDATA[未分类]]></category>
+		<guid isPermaLink="false">http://716.6fd.myftpupload.com/?p=496</guid>
+
+					<description><![CDATA[<p>几年前见过你之后，时而也想过大家会不会再聚到一起。愿你在那边过得好。</p>
+<p><a href="/2014/12/04/a-sad-memo-for-a-friend/">为一位友人默哀</a>最先出现在<a href="/">終ノ空</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>几年前见过你之后，时而也想过大家会不会再聚到一起。<br>愿你在那边过得好。</p>
+<p><a href="/2014/12/04/a-sad-memo-for-a-friend/">为一位友人默哀</a>最先出现在<a href="/">終ノ空</a>。</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>今天Fortune Arterial汉化补丁发布，完坑说几句</title>
+		<link>/2012/04/25/fortune-arterial-translation-thoughts/</link>
+		
+		<dc:creator><![CDATA[岡崎鏡]]></dc:creator>
+		<pubDate>Wed, 25 Apr 2012 15:06:52 +0000</pubDate>
+				<category><![CDATA[未分类]]></category>
+		<category><![CDATA[avg]]></category>
+		<category><![CDATA[galgame]]></category>
+		<category><![CDATA[感想]]></category>
+		<category><![CDATA[汉化]]></category>
+		<category><![CDATA[萌乃妹]]></category>
+		<guid isPermaLink="false">http://716.6fd.myftpupload.com/?p=217</guid>
+
+					<description><![CDATA[<p>和萌乃妹的各位一起熬夜到凌晨，终于把补丁弄好发布了这次给kagaya填坑当校对，真可谓十分有激情。一开始就觉得燃得不行最后的结果虽是我们撞坑，但这是不得已的结果。FA有爱组的组长想必也是吃了一惊，他没想到真的会有人看不惯他的行为来撞他坑吧。至于他的行为是什么，咱也不多说了，贴吧那边有很多人表达过意见了。这事正好碰上kagaya这个有激情又喜欢FA的人，在他的号召下，前萌乃妹的大家都一齐努力，在一个...</p>
+<p><a href="/2012/04/25/fortune-arterial-translation-thoughts/">今天Fortune Arterial汉化补丁发布，完坑说几句</a>最先出现在<a href="/">終ノ空</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>和萌乃妹的各位一起熬夜到凌晨，终于把补丁弄好发布了<br>这次给kagaya填坑当校对，真可谓十分有激情。<br>一开始就觉得燃得不行<br>最后的结果虽是我们撞坑，但这是不得已的结果。<br>FA有爱组的组长想必也是吃了一惊，他没想到真的会有人看不惯他的行为来撞他坑吧。<br>至于他的行为是什么，咱也不多说了，贴吧那边有很多人表达过意见了。<br>这事正好碰上kagaya这个有激情又喜欢FA的人，在他的号召下，<br>前萌乃妹的大家都一齐努力，在一个多月的时间内从头开始（用了部分月桂组的初翻文本）、填完了这个可谓是GAL汉化史上过程最乱的“受诅咒”的坑。<br>虽然我不算萌乃妹的正式组员，但能参加这样的一个事件为这么一个坑出力，我实在觉得非常荣幸。<br>从某种意义上来说，咱的汉化生涯上也多了一个非常有趣的经历，算是可以圆满结束了。<br>发布帖在这<br>http://bbs.sumisora.org/read.php?tid=11025896</p>
+<p><a href="/2012/04/25/fortune-arterial-translation-thoughts/">今天Fortune Arterial汉化补丁发布，完坑说几句</a>最先出现在<a href="/">終ノ空</a>。</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

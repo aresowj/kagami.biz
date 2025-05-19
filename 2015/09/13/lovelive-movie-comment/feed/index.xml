@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	「Lovelive 剧场版观后小感」的评论	</title>
+	<atom:link href="/2015/09/13/lovelive-movie-comment/feed/" rel="self" type="application/rss+xml" />
+	<link>/2015/09/13/lovelive-movie-comment/</link>
+	<description>坚定步伐。</description>
+	<lastBuildDate>Tue, 07 Dec 2021 19:30:00 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.8.1</generator>
+	<item>
+		<title>
+		评论者：岡崎鏡		</title>
+		<link>/2015/09/13/lovelive-movie-comment/#comment-53</link>
+
+		<dc:creator><![CDATA[岡崎鏡]]></dc:creator>
+		<pubDate>Sat, 26 Oct 2019 17:54:57 +0000</pubDate>
+		<guid isPermaLink="false">/?p=649#comment-53</guid>
+
+					<description><![CDATA[回复给 &lt;a href=&quot;/2015/09/13/lovelive-movie-comment/#comment-51&quot;&gt;张一宏&lt;/a&gt;。
+
+诶这样吗……现在我都不太记得了]]></description>
+			<content:encoded><![CDATA[<p>回复给 <a href="/2015/09/13/lovelive-movie-comment/#comment-51">张一宏</a>。</p>
+<p>诶这样吗……现在我都不太记得了</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：张一宏		</title>
+		<link>/2015/09/13/lovelive-movie-comment/#comment-51</link>
+
+		<dc:creator><![CDATA[张一宏]]></dc:creator>
+		<pubDate>Sat, 26 Oct 2019 08:39:21 +0000</pubDate>
+		<guid isPermaLink="false">/?p=649#comment-51</guid>
+
+					<description><![CDATA[其实我倒觉得，剧场版里那首英文歌反而是一大败笔。]]></description>
+			<content:encoded><![CDATA[<p>其实我倒觉得，剧场版里那首英文歌反而是一大败笔。</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

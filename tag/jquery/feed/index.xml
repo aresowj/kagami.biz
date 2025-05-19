@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>jQuery 归档 &#187; 終ノ空</title>
+	<atom:link href="/tag/jquery/feed/" rel="self" type="application/rss+xml" />
+	<link>/tag/jquery/</link>
+	<description>坚定步伐。</description>
+	<lastBuildDate>Thu, 13 Jan 2022 04:52:38 +0000</lastBuildDate>
+	<language>zh-Hans</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.8.1</generator>
+
+<image>
+	<url>/wp-content/uploads/2018/01/cropped-cropped-2015-12-28-171854-1-32x32.jpg</url>
+	<title>jQuery 归档 &#187; 終ノ空</title>
+	<link>/tag/jquery/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>加入Disqus社区 分享一下集成方法</title>
+		<link>/2016/01/14/integrate-disqus/</link>
+		
+		<dc:creator><![CDATA[岡崎鏡]]></dc:creator>
+		<pubDate>Thu, 14 Jan 2016 14:30:56 +0000</pubDate>
+				<category><![CDATA[未分类]]></category>
+		<category><![CDATA[css]]></category>
+		<category><![CDATA[JavaScript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[wordpress]]></category>
+		<category><![CDATA[编程]]></category>
+		<guid isPermaLink="false">/?p=740</guid>
+
+					<description><![CDATA[<p>Disqus的跨站点交流功能非常吸引我，于是花了点时间给自己的博客装上。过程实际上只有几步，关键是在于如何确定margin的大小，以此调节Disqus模块位置，使其与现用的主题（官方默认的Twenty Fifteen）融合。安装完Disqus插件并且导入原有的评论，看上去是这样的： 比较难看 ，要是不能调我宁愿不装了。看了下官方的说明，似乎需要自己动手调整CSS，Disqus的div id为&#8...</p>
+<p><a href="/2016/01/14/integrate-disqus/">加入Disqus社区 分享一下集成方法</a>最先出现在<a href="/">終ノ空</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<div class="wp-block-image"><figure class="aligncenter"><a href="http://www.kagami.biz/wp-content/uploads/2016/01/qqe688aae59bbe20160114222144.jpg" rel="attachment wp-att-743"><img fetchpriority="high" decoding="async" width="990" height="933" src="http://www.kagami.biz/wp-content/uploads/2016/01/qqe688aae59bbe20160114222144.jpg" alt="QQ截图20160114222144" class="wp-image-743" srcset="/wp-content/uploads/2016/01/qqe688aae59bbe20160114222144.jpg 990w, /wp-content/uploads/2016/01/qqe688aae59bbe20160114222144-300x283.jpg 300w, /wp-content/uploads/2016/01/qqe688aae59bbe20160114222144-768x724.jpg 768w" sizes="(max-width: 990px) 100vw, 990px" /></a></figure></div>
+
+
+
+<p>Disqus的跨站点交流功能非常吸引我，于是花了点时间给自己的博客装上。<br>过程实际上只有几步，关键是在于如何确定margin的大小，以此调节Disqus模块位置，使其与现用的主题（官方默认的Twenty Fifteen）融合。<br>安装完Disqus插件并且导入原有的评论，看上去是这样的：<br><br>比较难看 ，要是不能调我宁愿不装了。<br>看了下官方的说明，似乎需要自己动手调整CSS，Disqus的div id为&#8217;disqus_thread&#8217;。<br>我也尝试过用Wordpress自带的CSS编辑功能，但不太熟悉CSS，没有找到对应主题样式调节margin, padding的方法，将主题样式表中的media部分照搬过来似乎不管用。于是转投JavaScript，安装插件<a href="https://wordpress.org/plugins/custom-css-and-javascript/" target="_blank" rel="noopener noreferrer">Custom CSS and Javascript</a>。<br>简单地分析后发现，只需要获取&lt;article&gt;的两边margin并为Disqus的div赋上并调节背景色即可，通过以下代码完成。</p>
+
+
+
+<span id="more-740"></span>
+
+
+
+<pre class="wp-block-code EnlighterJSRAW"><code>jQuery(document).ready(function () {
+  var $article = jQuery('article').first();
+  var $disqus = jQuery('#disqus_thread');
+  $disqus.css('margin-left', $inner.css('margin-left')).css('margin-right', $inner.css('margin-right')).css('background-color', 'white').css('padding', '30px');
+})</code></pre>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter"><a href="http://www.kagami.biz/wp-content/uploads/2016/01/qqe688aae59bbe20160114223026.jpg" rel="attachment wp-att-745"><img decoding="async" width="966" height="820" src="http://www.kagami.biz/wp-content/uploads/2016/01/qqe688aae59bbe20160114223026.jpg" alt="QQ截图20160114223026" class="wp-image-745" srcset="/wp-content/uploads/2016/01/qqe688aae59bbe20160114223026.jpg 966w, /wp-content/uploads/2016/01/qqe688aae59bbe20160114223026-300x255.jpg 300w, /wp-content/uploads/2016/01/qqe688aae59bbe20160114223026-768x652.jpg 768w" sizes="(max-width: 966px) 100vw, 966px" /></a></figure></div>
+
+
+
+<p>完成后的模样：<br><br>只是非常简单的一个小修改，希望能给不知如何整合Disqus的朋友一点思路。</p>
+<p><a href="/2016/01/14/integrate-disqus/">加入Disqus社区 分享一下集成方法</a>最先出现在<a href="/">終ノ空</a>。</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>
