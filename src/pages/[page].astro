@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map((page) => ({
+    params: { page: page.data.routeSlug },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const { Content } = await page.render();
+const { title, description } = page.data;
+---
+
+<Base title={title} description={description}>
+  <article class="page">
+    <header class="page-head">
+      <h1>{title}</h1>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Base>
+
+<style>
+  .page {
+    max-width: var(--measure);
+    margin-inline: auto;
+  }
+  .page-head {
+    margin-bottom: 1.8rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .page-head h1 {
+    margin: 0;
+    font-family: var(--serif-cjk);
+    font-size: clamp(1.7rem, 5vw, 2.3rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+</style>

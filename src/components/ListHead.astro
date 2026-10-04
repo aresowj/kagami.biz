@@ -1,0 +1,42 @@
+---
+interface Props {
+  kicker?: string;
+  title: string;
+  subtitle?: string;
+}
+
+const { kicker, title, subtitle } = Astro.props;
+---
+
+<header class="list-head">
+  {kicker && <p class="kicker">{kicker}</p>}
+  <h1>{title}</h1>
+  {subtitle && <p class="subtitle">{subtitle}</p>}
+</header>
+
+<style>
+  .list-head {
+    max-width: var(--measure);
+    margin: 0 auto 2.4rem;
+    text-align: center;
+  }
+  .list-head .kicker {
+    margin: 0 0 0.5rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .list-head h1 {
+    margin: 0;
+    font-size: clamp(1.8rem, 6vw, 2.6rem);
+    letter-spacing: 0.08em;
+  }
+  .list-head .subtitle {
+    margin: 0.6rem 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+</style>

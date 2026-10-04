@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kagami.biz/sitemap_index.xml

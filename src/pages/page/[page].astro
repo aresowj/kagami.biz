@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import ListHead from '../../components/ListHead.astro';
+import { getSortedPosts } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  const POSTS_PER_PAGE = 9;
+  const posts = await getSortedPosts();
+  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+  const paths = [];
+  for (let page = 2; page <= totalPages; page++) {
+    const start = (page - 1) * POSTS_PER_PAGE;
+    paths.push({
+      params: { page: String(page) },
+      props: {
+        posts: posts.slice(start, start + POSTS_PER_PAGE),
+        current: page,
+        totalPages,
+      },
+    });
+  }
+  return paths;
+}
+
+const { posts, current, totalPages } = Astro.props;
+---
+
+<Base title={`第 ${current} 页`} wide>
+  <ListHead title="文章列表" subtitle={`第 ${current} / ${totalPages} 页`} />
+  <PostList posts={posts} current={current} totalPages={totalPages} />
+</Base>
