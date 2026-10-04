@@ -19,6 +19,19 @@ function normalize(route) {
   return r;
 }
 
+/**
+ * Cloudflare Pages (and the browser) percent-encode CJK paths, but the files
+ * on disk use the decoded characters. Compare routes in decoded form so the
+ * legacy percent-encoded sitemap slugs match the generated directories.
+ */
+function canonical(route) {
+  try {
+    return decodeURI(normalize(route));
+  } catch {
+    return normalize(route);
+  }
+}
+
 function walk(dir, base = '') {
   const out = [];
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -35,11 +48,11 @@ const pageLocs = readLocs('page-sitemap.xml').filter((l) => l !== '/');
 const categoryLocs = readLocs('category-sitemap.xml');
 const tagLocs = readLocs('post_tag-sitemap.xml');
 
-const actual = new Set(walk(DIST).map(normalize));
+const actual = new Set(walk(DIST).map((r) => canonical(r)));
 
 const errors = [];
 const check = (route, label) => {
-  if (!actual.has(normalize(route))) errors.push(`MISSING ${label}: ${route}`);
+  if (!actual.has(canonical(route))) errors.push(`MISSING ${label}: ${route}`);
 };
 
 // 1. Every original post + page must exist.
@@ -71,7 +84,7 @@ const expected = new Set([
   ...categoryLocs,
   ...tagLocs,
   ...Array.from({ length: homePages - 1 }, (_, i) => `/page/${i + 2}/`),
-].map(normalize));
+].map((r) => canonical(r)));
 
 const extras = [...actual].filter((r) => !expected.has(r)).sort();
 

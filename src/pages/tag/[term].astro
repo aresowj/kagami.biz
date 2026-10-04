@@ -3,23 +3,24 @@ import Base from '../../layouts/Base.astro';
 import PostList from '../../components/PostList.astro';
 import ListHead from '../../components/ListHead.astro';
 import { getSortedPosts, groupByTag } from '../../lib/posts';
-import { tagSlug } from '../../config';
+import { tagPath } from '../../config';
 
 export async function getStaticPaths() {
   const POSTS_PER_PAGE = 10;
   const posts = await getSortedPosts();
   const byTag = groupByTag(posts);
   return [...byTag].map(([name, list]) => ({
-    params: { term: tagSlug(name) },
+    params: { term: tagPath(name) },
     props: {
       name,
       posts: list.slice(0, POSTS_PER_PAGE),
       totalPages: Math.ceil(list.length / POSTS_PER_PAGE) || 1,
     },
-  }));}
+  }));
+}
 
 const { name, posts, totalPages } = Astro.props;
-const slug = tagSlug(name);
+const slug = tagPath(name);
 ---
 
 <Base title={`#${name}`} wide>

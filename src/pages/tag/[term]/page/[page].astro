@@ -3,7 +3,7 @@ import Base from '../../../../layouts/Base.astro';
 import PostList from '../../../../components/PostList.astro';
 import ListHead from '../../../../components/ListHead.astro';
 import { getSortedPosts, groupByTag } from '../../../../lib/posts';
-import { tagSlug } from '../../../../config';
+import { tagPath } from '../../../../config';
 
 export async function getStaticPaths() {
   const POSTS_PER_PAGE = 10;
@@ -15,7 +15,7 @@ export async function getStaticPaths() {
     for (let page = 2; page <= totalPages; page++) {
       const start = (page - 1) * POSTS_PER_PAGE;
       paths.push({
-        params: { term: tagSlug(name), page: String(page) },
+        params: { term: tagPath(name), page: String(page) },
         props: {
           name,
           posts: list.slice(start, start + POSTS_PER_PAGE),
@@ -29,7 +29,7 @@ export async function getStaticPaths() {
 }
 
 const { name, posts, current, totalPages } = Astro.props;
-const slug = tagSlug(name);
+const slug = tagPath(name);
 ---
 
 <Base title={`#${name} · 第 ${current} 页`} wide>

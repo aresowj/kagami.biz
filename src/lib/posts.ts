@@ -1,5 +1,5 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { CATEGORY_SLUG_BY_NAME, tagSlug } from '../config';
+import { CATEGORY_SLUG_BY_NAME, tagPath, tagSlug } from '../config';
 
 export type Post = CollectionEntry<'blog'>;
 
@@ -42,4 +42,4 @@ export function categoryNameForSlug(slug: string): string {
   return entry ? entry[0] : slug;
 }
 
-export { tagSlug };
+export { tagSlug, tagPath };

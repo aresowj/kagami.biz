@@ -39,8 +39,20 @@ export const CATEGORY_SLUG_BY_NAME = {
  * Percent-encode a tag name the same way WordPress does in its URLs:
  * ASCII tags are lowercased, CJK uses lowercase percent-escapes.
  */
+/**
+ * The filesystem/route form of a tag slug. WordPress used lowercase,
+ * percent-encoded slugs; Cloudflare Pages matches on the decoded path, so the
+ * generated directory must contain the raw characters (lowercased for ASCII,
+ * and CJK left as-is). Browsers and Cloudflare percent-encode on request.
+ */
+export function tagPath(name) {
+  return name.replace(/[''\u2019]/g, '').toLowerCase();
+}
+
+/**
+ * The percent-encoded slug as WordPress emitted it (lowercase hex), used for
+ * sitemap URLs so they match the legacy site exactly.
+ */
 export function tagSlug(name) {
-  return encodeURIComponent(name.replace(/[''\u2019]/g, ''))
-    .toLowerCase()
-    .replace(/%20/g, '-');
+  return encodeURIComponent(tagPath(name));
 }
