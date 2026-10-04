@@ -1,6 +1,4 @@
 # Cloudflare Pages redirects
-# WordPress search → home
-/?s=*  /  301
 
 # Canonicalise the old feed entry point
 /feed  /feed/index.xml  301
