@@ -33,18 +33,18 @@ const link = hrefFor ?? defaultHref;
 
 <style>
   .post-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1.2rem, 2.4vw, 1.8rem);
+    column-count: 3;
+    column-gap: clamp(1.2rem, 2.4vw, 1.8rem);
+    column-fill: balance;
   }
   @media (max-width: 900px) {
     .post-grid {
-      grid-template-columns: repeat(2, 1fr);
+      column-count: 2;
     }
   }
   @media (max-width: 640px) {
     .post-grid {
-      grid-template-columns: 1fr;
+      column-count: 1;
     }
   }
   .pagination {
