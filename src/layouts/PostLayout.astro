@@ -1,6 +1,6 @@
 ---
 import Base from './Base.astro';
-import Disqus from '../components/Disqus.astro';
+import Giscus from '../components/Giscus.astro';
 import { formatDate } from '../lib/dates';
 import { categorySlug, tagPath } from '../lib/posts';
 import { SITE } from '../config';
@@ -15,8 +15,6 @@ interface Props {
 const { post, prev, next } = Astro.props;
 const { title, description, date, updated, categories, tags, cover, url } = post.data;
 const category = categories[0] ?? '未分类';
-const postUrl = new URL(url, Astro.site || SITE.url).href;
-const identifier = url; // Use URL path as the Disqus identifier
 ---
 
 <Base
@@ -61,7 +59,7 @@ const identifier = url; // Use URL path as the Disqus identifier
       </footer>
     )}
     
-    <Disqus url={postUrl} identifier={identifier} title={title} />
+    <Giscus />
   </article>
 
   <nav class="post-nav" aria-label="文章导航">
