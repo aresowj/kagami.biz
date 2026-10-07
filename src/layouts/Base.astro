@@ -123,18 +123,19 @@ const year = new Date().getFullYear();
    * 終ノ空 — a quiet, literary theme. Ink on warm paper.
    * ------------------------------------------------------------ */
   :root {
-    --paper: #f6f2ea;
-    --paper-deep: #efe9dd;
-    --surface: #fffdf8;
-    --ink: #2b2a28;
-    --ink-soft: #56514a;
-    --muted: #8b8378;
-    --line: #e0d8c9;
-    --line-strong: #cdc2ad;
-    --accent: #8a5a44; /* sumi-brown */
-    --accent-deep: #6d4433;
-    --accent-soft: #f0e3d8;
-    --plum: #6b5a72;
+    /* sumi ink and paper - lightened and more colorful */
+    --paper: #ffffff;
+    --paper-deep: #f5f0e6;
+    --surface: #ffffff;
+    --ink: #363432;
+    --ink-soft: #635f59;
+    --muted: #9c958b;
+    --line: #ebe6df;
+    --line-strong: #d9d2c5;
+    --accent: #d67a63; /* coral/terracotta */
+    --accent-deep: #b85d47;
+    --accent-soft: #faebe6;
+    --plum: #86728d;
     --code-bg: #2b2a28;
     --code-ink: #f0ece3;
 
@@ -161,8 +162,8 @@ const year = new Date().getFullYear();
     margin: 0;
     background-color: var(--paper);
     background-image:
-      radial-gradient(circle at 12% -8%, #fff9ee 0%, transparent 42%),
-      radial-gradient(circle at 88% 4%, #f3ece0 0%, transparent 38%);
+      radial-gradient(circle at 12% -8%, #fff0e6 0%, transparent 42%),
+      radial-gradient(circle at 88% 4%, #e6efff 0%, transparent 38%);
     color: var(--ink);
     font-family: var(--serif-cjk);
     font-size: 17px;

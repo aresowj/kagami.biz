@@ -1,0 +1,34 @@
+---
+interface Props {
+  url: string;
+  identifier: string;
+  title: string;
+}
+
+const { url, identifier, title } = Astro.props;
+// Replace 'kagamibiz' with the exact shortname used in the WordPress blog if different.
+const shortname = 'kagamibiz';
+---
+
+<div id="disqus_thread" class="disqus-container"></div>
+<script is:inline define:vars={{ url, identifier, title, shortname }}>
+  var disqus_config = function () {
+    this.page.url = url;
+    this.page.identifier = identifier;
+    this.page.title = title;
+  };
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://' + shortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+<style>
+  .disqus-container {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+</style>
