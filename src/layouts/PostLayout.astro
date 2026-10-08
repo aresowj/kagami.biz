@@ -1,6 +1,7 @@
 ---
 import Base from './Base.astro';
 import Giscus from '../components/Giscus.astro';
+import HistoricalComments from '../components/HistoricalComments.astro';
 import { formatDate } from '../lib/dates';
 import { categorySlug, tagPath } from '../lib/posts';
 import { SITE } from '../config';
@@ -59,6 +60,7 @@ const category = categories[0] ?? '未分类';
       </footer>
     )}
     
+    <HistoricalComments url={url} />
     <Giscus />
   </article>
 
