@@ -1,0 +1,107 @@
+---
+import { formatDate } from '../lib/dates';
+import { categorySlug } from '../lib/posts';
+import type { Post } from '../lib/posts';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { title, description, date, categories, cover, url } = post.data;
+const category = categories[0] ?? '未分类';
+---
+
+<article class="card">
+  {cover && (
+    <a class="card-cover" href={url} tabindex="-1" aria-hidden="true">
+      <img src={cover} alt="" loading="lazy" />
+    </a>
+  )}
+  <div class="card-body">
+    <div class="card-meta">
+      <a class="card-cat" href={`/category/${categorySlug(category)}/`}>{category}</a>
+      <time datetime={date.toISOString()}>{formatDate(date)}</time>
+    </div>
+    <h2 class="card-title"><a href={url}>{title}</a></h2>
+    {description && <p class="card-excerpt">{description.replace(/\.\.\.$/, '…')}</p>}
+  </div>
+</article>
+
+<style>
+  .card {
+    display: block;
+    break-inside: avoid;
+    width: 100%;
+    margin: 0 0 clamp(1.2rem, 2.4vw, 1.8rem);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px rgba(43, 42, 40, 0.1);
+    border-color: var(--line-strong);
+  }
+  .card-cover {
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--paper-deep);
+  }
+  .card-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .card:hover .card-cover img {
+    transform: scale(1.04);
+  }
+  .card-body {
+    padding: 1.3rem 1.4rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .card-cat {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .card-cat:hover {
+    color: var(--accent-deep);
+  }
+  .card-title {
+    margin: 0;
+    font-size: 1.18rem;
+    line-height: 1.5;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  .card-title a {
+    color: var(--ink);
+  }
+  .card:hover .card-title a {
+    color: var(--accent-deep);
+  }
+  .card-excerpt {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

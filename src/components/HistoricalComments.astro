@@ -1,0 +1,108 @@
+---
+import commentsData from '../data/comments.json';
+
+interface Props {
+  url: string; // The original URL of the page/post
+}
+
+const { url } = Astro.props;
+const html = commentsData[url as keyof typeof commentsData];
+---
+
+{html && (
+  <div class="historical-comments">
+    <h3 class="hc-title">历史评论归档 (Historical Comments)</h3>
+    <p class="hc-desc">以下是博客早期的原生评论记录，现已归档并设为只读。</p>
+    <ol class="comment-list" set:html={html}></ol>
+  </div>
+)}
+
+<style is:global>
+  .historical-comments {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .hc-title {
+    margin: 0 0 0.5rem;
+    font-size: 1.3rem;
+    color: var(--ink);
+  }
+  .hc-desc {
+    margin: 0 0 2rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  /* WordPress Comment Styles */
+  .historical-comments ol.comment-list,
+  .historical-comments ol.children {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .historical-comments ol.children {
+    margin-left: 2rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--line-light);
+  }
+  .historical-comments li.comment {
+    margin-bottom: 1.5rem;
+  }
+  .historical-comments .comment-body {
+    padding: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .historical-comments .comment-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .historical-comments .comment-author {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .historical-comments .comment-author img {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+  }
+  .historical-comments .comment-author .fn {
+    font-weight: 600;
+    color: var(--ink);
+    font-style: normal;
+  }
+  .historical-comments .comment-author a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .historical-comments .comment-author .says {
+    display: none;
+  }
+  .historical-comments .comment-metadata a {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .historical-comments .comment-content {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .historical-comments .comment-content p:last-child {
+    margin-bottom: 0;
+  }
+  
+  @media (max-width: 600px) {
+    .historical-comments ol.children {
+      margin-left: 1rem;
+      padding-left: 0.5rem;
+    }
+  }
+</style>

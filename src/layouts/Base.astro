@@ -1,0 +1,503 @@
+---
+import { SITE, NAV } from '../config';
+import { formatDate } from '../lib/dates';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  type?: 'website' | 'article';
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  wide?: boolean;
+}
+
+const {
+  title,
+  description = SITE.description,
+  image,
+  imageAlt,
+  type = 'website',
+  publishedTime,
+  modifiedTime,
+  wide = false,
+} = Astro.props;
+
+const pageTitle = title ? `${title} | ${SITE.title}` : `${SITE.title} — ${SITE.description}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = image ? new URL(image, Astro.site).href : null;
+const currentPath = Astro.url.pathname;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:site_name" content={SITE.title} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={type} />
+    <meta property="og:locale" content="zh_CN" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {ogImage && <meta property="og:image:alt" content={imageAlt ?? title ?? SITE.title} />}
+    {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime.toISOString()} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:creator" content={SITE.twitter} />
+
+    <link rel="alternate" type="application/rss+xml" title={`${SITE.title} » Feed`} href="/feed/" />
+    <link rel="icon" href="/wp-content/uploads/2018/01/cropped-cropped-2015-12-28-171854-1-32x32.jpg" sizes="32x32" />
+    <link rel="icon" href="/wp-content/uploads/2018/01/cropped-cropped-2015-12-28-171854-1-192x192.jpg" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/wp-content/uploads/2018/01/cropped-cropped-2015-12-28-171854-1-180x180.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Serif+JP:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap"
+    />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JKRQ3WXFPJ" is:inline></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JKRQ3WXFPJ');
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <div class="branding">
+          <a class="site-title" href="/" rel="home">
+            <span class="site-title-main">終ノ空</span>
+            <span class="site-title-sub">Kagami</span>
+          </a>
+          <p class="site-description">{SITE.description}</p>
+        </div>
+
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" hidden />
+        <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </label>
+
+        <nav class="site-nav" aria-label="Primary">
+          <ul>
+            {NAV.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class:list={{ active: item.href === '/' ? currentPath === '/' : currentPath.startsWith(item.href) }}
+                >{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div id="content" class:list={['wrap', 'content', { wide }]}>
+      <slot />
+    </div>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>
+          © {SITE.startYear}–{year} {SITE.author}
+          <span class="sep">·</span>
+          <a href={SITE.weibo} rel="me">微博</a>
+          <span class="sep">·</span>
+          <a href={SITE.twitterUrl} rel="me">Twitter</a>
+          <span class="sep">·</span>
+          <a href="/feed/">RSS</a>
+          <span class="sep">·</span>
+          <a href="/privacy-policy/">隐私政策</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  /* ---------------------------------------------------------------
+   * 終ノ空 — a quiet, literary theme. Ink on warm paper.
+   * ------------------------------------------------------------ */
+  :root {
+    /* sumi ink and paper - lightened and more colorful */
+    --paper: #ffffff;
+    --paper-deep: #f5f0e6;
+    --surface: #ffffff;
+    --ink: #363432;
+    --ink-soft: #635f59;
+    --muted: #9c958b;
+    --line: #ebe6df;
+    --line-strong: #d9d2c5;
+    --accent: #d67a63; /* coral/terracotta */
+    --accent-deep: #b85d47;
+    --accent-soft: #faebe6;
+    --plum: #86728d;
+    --code-bg: #2b2a28;
+    --code-ink: #f0ece3;
+
+    --serif: 'EB Garamond', 'Noto Serif SC', 'Noto Serif JP', Georgia, 'Songti SC', serif;
+    --serif-cjk: 'Noto Serif SC', 'Noto Serif JP', 'Songti SC', Georgia, serif;
+    --sans: 'Noto Serif SC', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+    --measure: 46rem;
+    --wrap: 72rem;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(circle at 12% -8%, #fff0e6 0%, transparent 42%),
+      radial-gradient(circle at 88% 4%, #e6efff 0%, transparent 38%);
+    color: var(--ink);
+    font-family: var(--serif-cjk);
+    font-size: 17px;
+    line-height: 1.9;
+    font-feature-settings: 'palt' 1;
+    text-rendering: optimizeLegibility;
+  }
+
+  a {
+    color: var(--accent-deep);
+    text-decoration: none;
+    text-underline-offset: 3px;
+    transition: color 0.18s ease;
+  }
+  a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -999px;
+    top: 0;
+    background: var(--surface);
+    padding: 0.6rem 1rem;
+    z-index: 100;
+  }
+  .skip-link:focus {
+    left: 0;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--wrap);
+    margin-inline: auto;
+    padding-inline: clamp(1.1rem, 4vw, 2.5rem);
+  }
+
+  /* ------------------------------------------------- header ------ */
+  .site-header {
+    border-bottom: 1px solid var(--line);
+    background: color-mix(in srgb, var(--paper) 82%, transparent);
+    backdrop-filter: blur(6px);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 1.1rem;
+  }
+
+  .branding {
+    min-width: 0;
+  }
+
+  .site-title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .site-title:hover {
+    text-decoration: none;
+  }
+  .site-title-main {
+    font-family: var(--serif-cjk);
+    font-size: clamp(1.5rem, 4vw, 1.9rem);
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    padding-left: 0.28em;
+  }
+  .site-title-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .site-description {
+    margin: 0.15rem 0 0;
+    font-size: 0.82rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  .site-nav ul {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.9rem, 2.2vw, 1.7rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .site-nav a {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    letter-spacing: 0.05em;
+    position: relative;
+    padding-block: 0.3rem;
+  }
+  .site-nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.22s ease;
+  }
+  .site-nav a:hover::after,
+  .site-nav a.active::after {
+    transform: scaleX(1);
+  }
+  .site-nav a.active {
+    color: var(--accent-deep);
+  }
+
+  .nav-toggle,
+  .nav-toggle-label {
+    display: none;
+  }
+
+  /* -------------------------------------------------- layout ----- */
+  .content {
+    padding-block: clamp(2rem, 5vw, 3.6rem) clamp(3rem, 7vw, 5rem);
+  }
+
+  /* -------------------------------------------------- footer ----- */
+  .site-footer {
+    border-top: 1px solid var(--line);
+    padding-block: 2.4rem;
+    color: var(--muted);
+    font-size: 0.86rem;
+    letter-spacing: 0.03em;
+  }
+  .site-footer p {
+    margin: 0;
+    text-align: center;
+  }
+  .site-footer .sep {
+    margin-inline: 0.5rem;
+    color: var(--line-strong);
+  }
+
+  /* ---------------------------------------------- prose styles --- */
+  .prose {
+    font-size: 1.06rem;
+    line-height: 1.95;
+    color: var(--ink);
+  }
+  .prose > * + * {
+    margin-top: 1.35em;
+  }
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    font-family: var(--serif-cjk);
+    color: var(--ink);
+    line-height: 1.4;
+    margin-top: 2.2em;
+    margin-bottom: 0.7em;
+    letter-spacing: 0.02em;
+  }
+  .prose h2 {
+    font-size: 1.5rem;
+    padding-bottom: 0.35em;
+    border-bottom: 1px solid var(--line);
+  }
+  .prose h3 {
+    font-size: 1.25rem;
+  }
+  .prose p {
+    margin: 0;
+  }
+  .prose strong {
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .prose blockquote {
+    margin: 1.6em 0;
+    padding: 0.4em 1.3em;
+    border-left: 3px solid var(--accent);
+    background: linear-gradient(90deg, var(--accent-soft), transparent 92%);
+    color: var(--ink-soft);
+    font-style: normal;
+    border-radius: 0 4px 4px 0;
+  }
+  .prose blockquote p + p {
+    margin-top: 0.9em;
+  }
+  .prose hr {
+    border: 0;
+    height: 1px;
+    background: var(--line);
+    margin: 2.4em auto;
+    width: 60%;
+  }
+  .prose ul,
+  .prose ol {
+    padding-left: 1.5em;
+    margin-block: 1.3em;
+  }
+  .prose li + li {
+    margin-top: 0.4em;
+  }
+  .prose code {
+    font-family: 'SFMono-Regular', ui-monospace, 'Cascadia Code', Consolas, monospace;
+    font-size: 0.86em;
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    padding: 0.12em 0.38em;
+    border-radius: 4px;
+  }
+  .prose pre {
+    background: var(--code-bg);
+    color: var(--code-ink);
+    padding: 1.1rem 1.2rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.86rem;
+    line-height: 1.6;
+  }
+  .prose pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+  }
+  .prose img {
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(43, 42, 40, 0.08);
+  }
+  .prose figure {
+    margin: 1.8em 0;
+    text-align: center;
+  }
+  .prose figcaption {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 0.5em;
+  }
+  .prose a {
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+  .prose table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+  }
+  .prose th,
+  .prose td {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--line);
+    text-align: left;
+  }
+
+  @media (max-width: 780px) {
+    .header-inner {
+      flex-wrap: wrap;
+    }
+    .nav-toggle-label {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 34px;
+      height: 34px;
+      cursor: pointer;
+    }
+    .nav-toggle-label span {
+      display: block;
+      height: 2px;
+      background: var(--ink-soft);
+      border-radius: 2px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
+      opacity: 0;
+    }
+    .nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+    .site-nav {
+      flex-basis: 100%;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.28s ease;
+    }
+    .nav-toggle:checked ~ .site-nav {
+      max-height: 22rem;
+    }
+    .site-nav ul {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      padding-top: 0.5rem;
+    }
+    .site-nav li {
+      width: 100%;
+      border-top: 1px solid var(--line);
+    }
+    .site-nav a {
+      display: block;
+      padding-block: 0.8rem;
+    }
+  }
+</style>

@@ -1,0 +1,81 @@
+---
+import PostCard from './PostCard.astro';
+import type { Post } from '../lib/posts';
+
+interface Props {
+  posts: Post[];
+  current?: number;
+  totalPages?: number;
+  hrefFor?: (n: number) => string;
+}
+
+const { posts, current = 1, totalPages = 1, hrefFor } = Astro.props;
+const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+const defaultHref = (n: number) => (n === 1 ? '/' : `/page/${n}/`);
+const link = hrefFor ?? defaultHref;
+---
+
+<div class="post-grid">
+  {posts.map((post) => <PostCard post={post} />)}
+</div>
+
+{totalPages > 1 && (
+  <nav class="pagination" aria-label="分页">
+    {pages.map((n) =>
+      n === current ? (
+        <span class="page-numbers current">{n}</span>
+      ) : (
+        <a class="page-numbers" href={link(n)}>{n}</a>
+      )
+    )}
+  </nav>
+)}
+
+<style>
+  .post-grid {
+    column-count: 3;
+    column-gap: clamp(1.2rem, 2.4vw, 1.8rem);
+    column-fill: balance;
+  }
+  @media (max-width: 900px) {
+    .post-grid {
+      column-count: 2;
+    }
+  }
+  @media (max-width: 640px) {
+    .post-grid {
+      column-count: 1;
+    }
+  }
+  .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: clamp(2.4rem, 5vw, 3.6rem);
+  }
+  .page-numbers {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.4rem;
+    height: 2.4rem;
+    padding-inline: 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink-soft);
+    background: var(--surface);
+    font-size: 0.9rem;
+    transition: all 0.18s ease;
+  }
+  .page-numbers:hover {
+    text-decoration: none;
+    border-color: var(--accent);
+    color: var(--accent-deep);
+  }
+  .page-numbers.current {
+    background: var(--accent-deep);
+    border-color: var(--accent-deep);
+    color: #fff;
+  }
+</style>

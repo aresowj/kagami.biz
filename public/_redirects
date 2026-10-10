@@ -1,0 +1,7 @@
+# Cloudflare Pages redirects
+
+# Canonicalise the old feed entry point
+/feed  /feed/index.xml  301
+
+# Yoast sitemap aliases
+/sitemap.xml  /sitemap_index.xml  301

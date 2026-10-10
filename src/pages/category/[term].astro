@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import ListHead from '../../components/ListHead.astro';
+import { getSortedPosts, groupByCategory, categoryNameForSlug } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  const POSTS_PER_PAGE = 10;
+  const posts = await getSortedPosts();
+  const byCategory = groupByCategory(posts);
+  return [...byCategory].map(([slug, list]) => ({
+    params: { term: slug },
+    props: {
+      slug,
+      posts: list.slice(0, POSTS_PER_PAGE),
+      totalPages: Math.ceil(list.length / POSTS_PER_PAGE) || 1,
+    },
+  }));
+}
+
+const { slug, posts, totalPages } = Astro.props;
+const name = categoryNameForSlug(slug);
+---
+
+<Base title={`${name} 分类`} wide>
+  <ListHead kicker="分类" title={name} />
+  <PostList
+    posts={posts}
+    current={1}
+    totalPages={totalPages}
+    hrefFor={(n) => (n === 1 ? `/category/${slug}/` : `/category/${slug}/page/${n}/`)}
+  />
+</Base>

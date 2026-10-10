@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { getSortedPosts } from '../lib/posts';
+
+const POSTS_PER_PAGE = 9;
+const posts = await getSortedPosts();
+const page = posts.slice(0, POSTS_PER_PAGE);
+const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+---
+
+<Base wide>
+  <section class="hero">
+    <p class="hero-kicker">Personal notes &amp; translations</p>
+    <h1 class="hero-title">終ノ空</h1>
+    <p class="hero-lead">关于动画、游戏、文学与翻译的个人记录。坚定步伐。</p>
+  </section>
+
+  <PostList posts={page} current={1} totalPages={totalPages} /></Base>
+
+<style>
+  .hero {
+    max-width: 40rem;
+    margin: 0 auto clamp(2.2rem, 5vw, 3.4rem);
+    text-align: center;
+  }
+  .hero-kicker {
+    margin: 0 0 0.8rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.92rem;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .hero-title {
+    margin: 0;
+    font-family: var(--serif-cjk);
+    font-size: clamp(2.6rem, 9vw, 4.2rem);
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    padding-left: 0.28em;
+    color: var(--ink);
+  }
+  .hero-lead {
+    margin: 1rem 0 0;
+    font-size: 1.02rem;
+    color: var(--ink-soft);
+    line-height: 1.9;
+  }
+</style>

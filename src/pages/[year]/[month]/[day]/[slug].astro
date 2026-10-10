@@ -1,0 +1,27 @@
+---
+import PostLayout from '../../../../layouts/PostLayout.astro';
+import { getSortedPosts } from '../../../../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await getSortedPosts();
+  return posts.map((post, index) => {
+    const parts = post.data.url.replace(/^\/|\/$/g, '').split('/');
+    const [year, month, day, ...rest] = parts;
+    return {
+      params: { year, month, day, slug: rest.join('/') },
+      props: {
+        post,
+        prev: posts[index + 1],
+        next: posts[index - 1],
+      },
+    };
+  });
+}
+
+const { post, prev, next } = Astro.props;
+const { Content } = await post.render();
+---
+
+<PostLayout post={post} prev={prev} next={next}>
+  <Content />
+</PostLayout>
